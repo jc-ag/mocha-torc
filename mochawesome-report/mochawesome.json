@@ -1,0 +1,159 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-07-15T18:59:21.573Z",
+    "end": "2023-07-15T18:59:22.527Z",
+    "duration": 954,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4da9b789-3881-4569-bfad-a041660d9890",
+      "title": "",
+      "fullFile": "/home/jcag/Documents/interviews/torc/mocha-torc/test/mocha-challenge.js",
+      "file": "/test/mocha-challenge.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3243627b-e606-4638-833a-4fc1e124cdf2",
+          "title": "Torc REST API Test Automation Challenge",
+          "fullFile": "/home/jcag/Documents/interviews/torc/mocha-torc/test/mocha-challenge.js",
+          "file": "/test/mocha-challenge.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should return success response with HTTP 200 OK",
+              "fullTitle": "Torc REST API Test Automation Challenge should return success response with HTTP 200 OK",
+              "timedOut": false,
+              "duration": 259,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Schema response definition\nconst schema = {\n  type: 'object',\n  properties: {\n    id: { type: 'number' },\n    name: { type: 'string' },\n    code: { type: 'string' },\n    flag: { type: 'string', format: 'url' },\n    parentAreaId: { type: 'number' },\n    parentArea: { type: 'string' },\n    childAreas: { type: 'array' }\n  },\n  required: [\n    'id',\n    'name',\n    'code',\n    'flag',\n    'parentAreaId',\n    'parentArea',\n    'childAreas'\n  ]\n};\n// HTTP REST Request\nconst res = await chai\n  .request(BASE_API_URL)\n  .get('/v4/areas/2149');\n// Object type assertion\nexpect(res).to.be.json;\n// HTTP code response assertion\nexpect(res).to.have.status(200);\n\n// Schema asserion\nexpect(JSON.parse(res.text)).to.be.jsonSchema(schema);\n// Response content assertion\nexpect(JSON.parse(res.text).name).to.be.eq('Mexico')",
+              "err": {},
+              "uuid": "efc123b6-13bf-4b38-a58f-979e2ce8e96a",
+              "parentUUID": "3243627b-e606-4638-833a-4fc1e124cdf2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return error when trying to get invalid status match, with status code 403",
+              "fullTitle": "Torc REST API Test Automation Challenge should return error when trying to get invalid status match, with status code 403",
+              "timedOut": false,
+              "duration": 229,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Schema response definition\n    const schema = {\n      type: 'object',\n      properties: {\n        message: { type: 'string' },\n        errorCode: { type: 'number' }\n      },\n      required: [\n        'message',\n        'errorCode'\n      ]\n    };\n    const requestQueryParams = {\n      status: 'INVALID'\n    }\n    const res = await chai\n      .request(BASE_API_URL)\n      .get('/v4/persons/2019/matches')\n      .query(requestQueryParams);\n    \n    // Object type assertion\n    expect(res).to.be.json;\n    // HTTP code response assertion\n    expect(res).to.have.status(403);\n    // Schema assertion\n    expect(JSON.parse(res.text)).to.be.jsonSchema(schema);\n    // Response content assertions\n    expect(JSON.parse(res.text).message).to.be.eq('The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.')\n    expect(JSON.parse(res.text).errorCode).to.be.eq(403)",
+              "err": {},
+              "uuid": "0251d7a7-7761-4974-a0f5-f3e3957821a4",
+              "parentUUID": "3243627b-e606-4638-833a-4fc1e124cdf2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return a not found response with status code 404",
+              "fullTitle": "Torc REST API Test Automation Challenge should return a not found response with status code 404",
+              "timedOut": false,
+              "duration": 239,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Schema response definition\n    const schema = {\n      type: 'object',\n      properties: {\n        error: { type: 'number' }\n      },\n      required: [\n        'error'\n      ]\n    };\n    // HTTP REST Request\n    const res = await chai\n      .request(BASE_API_URL)\n      .get('/v4/area');\n    \n    // Object type assertion\n    expect(res).to.be.json;\n    \n    // HTTP code response assertion\n    expect(res).to.have.status(404);\n    // Schema assertion\n    expect(JSON.parse(res.text)).to.be.jsonSchema(schema);\n    // Response content assertion\n    expect(JSON.parse(res.text).error).to.be.eq(404)",
+              "err": {},
+              "uuid": "88f1211f-62f9-4a4b-82a4-ffdde67f86d8",
+              "parentUUID": "3243627b-e606-4638-833a-4fc1e124cdf2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return error when trying to patch an area, with status code 405",
+              "fullTitle": "Torc REST API Test Automation Challenge should return error when trying to patch an area, with status code 405",
+              "timedOut": false,
+              "duration": 222,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Schema response definition\n    const schema = {\n      type: 'object',\n      properties: {\n        message: { type: 'string' },\n        errorCode: { type: 'number' }\n      },\n      required: [\n        'message',\n        'errorCode'\n      ]\n    };\n    const requestBody = {\n      \"name\": \"Mexico lindo y querido\"\n    }\n    const res = await chai\n      .request(BASE_API_URL)\n      .patch('/v4/areas/2000/')\n      .send(requestBody);\n    \n    // Object type assertion\n    expect(res).to.be.json;\n    // HTTP code response assertion\n    expect(res).to.have.status(405);\n    // Schema assertion\n    expect(JSON.parse(res.text)).to.be.jsonSchema(schema);\n    // Response content assertions\n    expect(JSON.parse(res.text).message).to.be.eq('Method not allowed. Use GET method only.')\n    expect(JSON.parse(res.text).errorCode).to.be.eq(405)",
+              "err": {},
+              "uuid": "9db32092-0ce6-45be-a80d-f342b4137ccc",
+              "parentUUID": "3243627b-e606-4638-833a-4fc1e124cdf2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "efc123b6-13bf-4b38-a58f-979e2ce8e96a",
+            "0251d7a7-7761-4974-a0f5-f3e3957821a4",
+            "88f1211f-62f9-4a4b-82a4-ffdde67f86d8",
+            "9db32092-0ce6-45be-a80d-f342b4137ccc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 949,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "[object Object]": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
